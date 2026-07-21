@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+env/
+.env
+*.log
+*.bak
+
+experiments/*.png
+experiments/*.json
+outputs/*
+!outputs/.gitkeep
