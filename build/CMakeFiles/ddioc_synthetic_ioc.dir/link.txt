@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libddioc_synthetic_ioc.a CMakeFiles/ddioc_synthetic_ioc.dir/cpp/src/synthetic_ioc.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libddioc_synthetic_ioc.a

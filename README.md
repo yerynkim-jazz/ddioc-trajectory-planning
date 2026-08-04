@@ -35,27 +35,28 @@ The included synthetic validation workflow in `ioc/DDIOC/validate_dnn.py` compar
 
 ## Repository layout
 
-- `ioc/DDIOC/`: data-driven IOC pipeline, dynamics learning, objective learning, validation, and planner tuning
-- `ioc/LIOC/`: classical IOC benchmark implementation
+- `cpp/`: C++ implementation with `src/`, `include/`, `tests/`, and its own `CMakeLists.txt`
+- `python/`: Python implementation with `src/ioc/`, `tests/`, and `pyproject.toml`
 - `examples/`: runnable public examples that showcase the thesis ideas end to end
 - `docs/figures/`: curated public figures suitable for reports or a project page
 - `outputs/`: local run artifacts generated during experiments
+- `.github/workflows/`: CI definitions for both implementations
 
 ## Main components
 
-`ioc/DDIOC/pipeline.py`
+`python/src/ioc/DDIOC/pipeline.py`
 End-to-end learning pipeline for Koopman-style dynamics learning and shared high-level objective estimation.
 
-`ioc/DDIOC/hlo_learning.py`
+`python/src/ioc/DDIOC/hlo_learning.py`
 Utilities for learning, loading, and saving high-level objective weights.
 
-`ioc/DDIOC/tune_qp_planner.py`
+`python/src/ioc/DDIOC/tune_qp_planner.py`
 Bilevel optimization utilities for tuning planner parameters against a learned high-level objective. The script supports generic JSON-based planner parameter updates and optional external planner or MPC hooks.
 
-`ioc/DDIOC/validate_dnn.py`
+`python/src/ioc/DDIOC/validate_dnn.py`
 Synthetic validation script for comparing polynomial and neural Koopman lifts. Figures are written under `outputs/figures/validate_dnn/`.
 
-`ioc/LIOC/linear_ioc_bilevel.py`
+`python/src/ioc/LIOC/linear_ioc_bilevel.py`
 Classical bilevel IOC benchmark for comparison against the data-driven method.
 
 `examples/synthetic_ioc_demo.py`
@@ -68,12 +69,14 @@ Create a local environment and install dependencies:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+python3 -m pip install -e ./python
 python3 -m pip install -r requirements.txt
 ```
 
 Typical entry points:
 
 ```bash
+export PYTHONPATH=python/src
 python3 -m ioc.DDIOC.pipeline --help
 python3 -m ioc.DDIOC.tune_qp_planner --help
 python3 -m ioc.LIOC.linear_ioc_bilevel --help
@@ -81,14 +84,35 @@ python3 -m ioc.DDIOC.validate_dnn
 python3 examples/synthetic_ioc_demo.py
 ```
 
+## C++ port
+
+The repository now includes a C++ implementation of the standalone synthetic IOC workflow and a C++ counterpart for the classical synthetic bilevel IOC benchmark. The current C++ surface targets the self-contained public examples: synthetic demonstration generation, high-level-objective recovery, LQR planner tuning, classical IOC-style tracking-weight fitting, baseline comparison, and JSON artifact export.
+
+Build and run it with CMake:
+
+```bash
+cmake -S cpp -B build/cpp
+cmake --build build/cpp -j4
+./build/cpp/ddioc_synthetic_demo
+./build/cpp/ddioc_lioc_benchmark
+./build/cpp/ddioc_validate_dynamics
+```
+
+The synthetic demo executable writes its JSON output under `outputs/examples/synthetic_ioc_demo_cpp/`. The broader Python DDIOC stack under `python/src/ioc/DDIOC/` still contains capabilities that have not yet been ported to C++, especially the CasADi- and PyTorch-based learning paths and the merged-CSV data pipeline.
+
+## Implementations
+
+- [C++ version](./cpp) - optimized for performance
+- [Python version](./python) - simpler and easier to experiment with
+
 Core dependencies are listed in `requirements.txt`, including PyTorch for the DNN Koopman-lift workflow. Optional optimization workflows also use packages such as `cvxpy`, `scikit-optimize`, and `pymoo`.
 
 ## Suggested first look
 
 - run `python3 -m ioc.DDIOC.validate_dnn` for a self-contained validation example
 - run `python3 examples/synthetic_ioc_demo.py` for a compact end-to-end synthetic IOC example
-- inspect `ioc/DDIOC/pipeline.py` for the end-to-end learning flow
-- inspect `ioc/LIOC/linear_ioc_bilevel.py` for the classical benchmark formulation
+- inspect `python/src/ioc/DDIOC/pipeline.py` for the end-to-end learning flow
+- inspect `python/src/ioc/LIOC/linear_ioc_bilevel.py` for the classical benchmark formulation
 
 ## Public scope
 
