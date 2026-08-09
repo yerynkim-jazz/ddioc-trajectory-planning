@@ -28,19 +28,25 @@ The public workflow starts from driving demonstrations, converts them into train
 
 ```mermaid
 flowchart TD
-    A["Driving demonstrations"] --> B["Preprocessing"]
-    B --> C["State-control trajectory data"]
-    C --> D["Polynomial or neural Koopman lift"]
-    D --> E["Surrogate dynamics learning"]
+    A["Driving data"] --> B["Preprocessing"]
+    B --> C["State-control trajectories"]
+    C --> D["Koopman lifting"]
+    D --> E["Dynamics learning"]
 
-    C --> F["Objective-feature construction"]
+    C --> F["Feature construction"]
     E --> G["Inverse optimal control"]
     F --> G
 
-    G --> H["Learned high-level objective weights"]
-    H --> I["Bilevel QP-planner tuning"]
-    I --> J["Optimized planner parameters and trajectories"]
+    G --> H["Learned HLO weights"]
+    H --> I["Bilevel planner tuning"]
+    I --> J["Planner parameters and trajectories"]
 ```
+
+- **Koopman lifting:** polynomial or neural lifting of the vehicle state.
+- **Dynamics learning:** identification of a linear surrogate model in the lifted space.
+- **Feature construction:** calculation of interpretable trajectory features used by inverse optimal control.
+- **HLO:** the learned high-level objective representing inferred driving preferences.
+- **Planner output:** optimized QP cost parameters and their resulting trajectories.
 
 ### Inputs and outputs
 
