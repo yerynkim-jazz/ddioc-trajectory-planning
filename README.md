@@ -67,7 +67,7 @@ flowchart TD
 
 ## Current evidence
 
-The included synthetic validation workflow in `ioc/DDIOC/validate_dnn.py` compares polynomial and neural Koopman lifts on held-out trajectories. In the current public run, the DNN lift achieved lower one-step and rollout error than the polynomial lift, and the generated figures are kept under `docs/figures/`.
+The included synthetic validation workflow in `python/src/ioc/DDIOC/validate_dnn.py` compares polynomial and neural Koopman lifts on held-out trajectories. In the current public run, the DNN lift achieved lower one-step and rollout error than the polynomial lift, and the generated figures are kept under `docs/figures/`.
 
 ## Repository layout
 
