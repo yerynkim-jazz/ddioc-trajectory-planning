@@ -1,5 +1,0 @@
-ddioc_smoke_test 4 0.0569085
-ddioc_lioc_smoke_test 3 0.209054
-ddioc_dynamics_smoke_test 2 0.0895149
-ddioc_pipeline_smoke_test 2 0.0572522
----

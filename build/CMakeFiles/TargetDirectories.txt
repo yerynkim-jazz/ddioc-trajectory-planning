@@ -1,4 +1,0 @@
-/Users/yerynkim/Desktop/ddioc-trajectory-planning/build/CMakeFiles/ddioc_synthetic_ioc.dir
-/Users/yerynkim/Desktop/ddioc-trajectory-planning/build/CMakeFiles/ddioc_synthetic_demo.dir
-/Users/yerynkim/Desktop/ddioc-trajectory-planning/build/CMakeFiles/edit_cache.dir
-/Users/yerynkim/Desktop/ddioc-trajectory-planning/build/CMakeFiles/rebuild_cache.dir

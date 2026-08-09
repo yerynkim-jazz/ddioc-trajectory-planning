@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/ddioc_pipeline_smoke_test.dir/tests/pipeline_smoke_test.cpp.o -o ddioc_pipeline_smoke_test  libddioc_synthetic_ioc.a 

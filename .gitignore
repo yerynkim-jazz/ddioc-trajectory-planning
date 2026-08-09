@@ -14,3 +14,24 @@ experiments/*.png
 experiments/*.json
 outputs/*
 !outputs/.gitkeep
+
+# CMake build artifacts
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+Testing/
+
+# Compiled files
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+
+# Python packaging artifacts
+*.egg-info/
+dist/
