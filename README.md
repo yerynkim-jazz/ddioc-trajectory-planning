@@ -28,17 +28,18 @@ The public workflow starts from driving demonstrations, converts them into train
 
 ```mermaid
 flowchart TD
-	A[Driving demonstrations] --> B[Preprocessing and trajectory feature extraction]
-	B --> C[Polynomial or neural Koopman lift]
-	C --> D["Dynamics-model learning"]
-	B --> E["High-level objective-weight learning"]
-	D --> F[Bilevel planner tuning]
-	E --> F
-	F --> G[Optimized trajectories]
-	G --> H["Held-out validation"]
-	A --> I["Classical IOC baseline"]
-	H --> J[Classical IOC baseline comparison]
-	I --> J
+    A["Driving demonstrations"] --> B["Preprocessing"]
+    B --> C["State-control trajectory data"]
+    C --> D["Polynomial or neural Koopman lift"]
+    D --> E["Surrogate dynamics learning"]
+
+    C --> F["Objective-feature construction"]
+    E --> G["Inverse optimal control"]
+    F --> G
+
+    G --> H["Learned high-level objective weights"]
+    H --> I["Bilevel QP-planner tuning"]
+    I --> J["Optimized planner parameters and trajectories"]
 ```
 
 ### Inputs and outputs
