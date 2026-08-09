@@ -39,7 +39,7 @@ flowchart TD
 
     G --> H["Learned HLO weights"]
     H --> I["Bilevel planner tuning"]
-    I --> J["Planner parameters and trajectories"]
+    I --> J["Optimal planner parameters"]
 ```
 
 - **Koopman lifting:** polynomial or neural lifting of the vehicle state.
