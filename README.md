@@ -22,6 +22,33 @@ The core thesis question is whether lane-change behavior can be explained and re
 
 This makes the repository useful both as thesis evidence and as a concrete portfolio project for controls, autonomy, and machine-learning interviews.
 
+## Method overview
+
+The public workflow starts from driving demonstrations, converts them into train/test trajectory segments and reference-aware features, then learns both a Koopman-style dynamics model and shared high-level objective weights. Those learned artifacts support downstream planner tuning, while separate validation and a classical IOC baseline provide comparison points that are already implemented in the repository.
+
+```mermaid
+flowchart TD
+	A[Driving demonstrations] --> B[Preprocessing and trajectory feature extraction]
+	B --> C[Polynomial or neural Koopman lift]
+	C --> D["Dynamics-model learning"]
+	B --> E["High-level objective-weight learning"]
+	D --> F[Bilevel planner tuning]
+	E --> F
+	F --> G[Optimized trajectories]
+	G --> H["Held-out validation"]
+	A --> I["Classical IOC baseline"]
+	H --> J[Classical IOC baseline comparison]
+	I --> J
+```
+
+### Inputs and outputs
+
+- Input demonstrations: merged or synthetic driving trajectories are loaded, normalized, split into train/test sets, and segmented for learning workflows.
+- Learned dynamics representation: the DDIOC pipeline fits Koopman matrices and either a polynomial lift or a DNN lift for trajectory rollouts.
+- Learned high-level objective weights: the HLO learner estimates shared objective weights from the segmented demonstrations and learned dynamics.
+- Planner output: bilevel planner tuning produces optimized trajectories under the learned objective.
+- Evaluation outputs: held-out dynamics metrics, trajectory overlays, and classical-IOC comparison artifacts are written under the repository's output and figure directories.
+
 ## What is in the public repo
 
 - research code for objective learning, dynamics learning, and planner tuning
