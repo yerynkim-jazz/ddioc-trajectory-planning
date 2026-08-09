@@ -1,4 +1,7 @@
+# macOS
 .DS_Store
+
+# Python caches and environments
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -7,9 +10,12 @@ __pycache__/
 venv/
 env/
 .env
+
+# Logs and temporary files
 *.log
 *.bak
 
+# Generated experiment outputs
 experiments/*.png
 experiments/*.json
 outputs/*
@@ -21,7 +27,6 @@ cmake-build-*/
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
-Makefile
 CTestTestfile.cmake
 Testing/
 
